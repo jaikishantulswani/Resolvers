@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  schedule:
+  - cron: "* 7 * * *" #every day on 7 AM
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+      with:
+        token: ${{ secrets.GITHUB_PERSONAL_TOKEN }}
+    - name: dnsvalidator
+      run: |
+        git clone https://github.com/vortexau/dnsvalidator
+        cd dnsvalidator
+        pip3 install wheel
+        pip3 install setuptools
+        sudo python3 setup.py install
+        rm ../resolvers.txt
+        dnsvalidator -tL https://raw.githubusercontent.com/janmasarik/resolvers/master/resolvers.txt -threads 5 -o ../resolvers.txt
+        sed -i '/^$/d' ../resolvers.txt
+    - name: Commit resolvers.txt
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add resolvers.txt
+        git commit -m "Update resolvers" -a
+        git push "https://janmasarik:${{ secrets.GITHUB_PERSONAL_TOKEN }}@github.com/janmasarik/resolvers.git" HEAD:master --follow-tags
