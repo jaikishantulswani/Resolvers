@@ -53,7 +53,6 @@ jobs:
           curl --silent https://raw.githubusercontent.com/janmasarik/resolvers/master/resolvers.txt | egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
           curl --silent https://public-dns.info/nameservers.txt |egrep -v '^1[.]0[.]|^1[.]1'| egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
           curl --silent https://raw.githubusercontent.com/bp0lr/dmut-resolvers/main/resolvers.txt | egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
-          rm ../freshresolvers.txt
           dnsvalidator -tL dailydns.txt -threads 5 -o ../freshresolvers.txt
         shell: bash
 
