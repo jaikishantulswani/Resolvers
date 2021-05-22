@@ -49,6 +49,7 @@ jobs:
           pip3 install wheel
           pip3 install setuptools
           sudo python3 setup.py install
+          cd ..
           curl --silent https://raw.githubusercontent.com/BBerastegui/fresh-dns-servers/master/resolvers.txt | egrep -v '^1[.]0[.]|^1[.]1' > dailydns.txt
           curl --silent https://raw.githubusercontent.com/janmasarik/resolvers/master/resolvers.txt | egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
           curl --silent https://public-dns.info/nameservers.txt |egrep -v '^1[.]0[.]|^1[.]1'| egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
