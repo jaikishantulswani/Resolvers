@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Inception
+name: Resolvers
 
 # Controls when the action will run. 
 on:
@@ -44,17 +44,17 @@ jobs:
 
       - name: Setting up and Running DnsValidator
         run: |
-        git clone https://github.com/vortexau/dnsvalidator
-        cd dnsvalidator
-        pip3 install wheel
-        pip3 install setuptools
-        sudo python3 setup.py install
-        curl --silent https://raw.githubusercontent.com/BBerastegui/fresh-dns-servers/master/resolvers.txt | egrep -v '^1[.]0[.]|^1[.]1' > dailydns.txt
-        curl --silent https://raw.githubusercontent.com/janmasarik/resolvers/master/resolvers.txt | egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
-        curl --silent https://public-dns.info/nameservers.txt |egrep -v '^1[.]0[.]|^1[.]1'| egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
-        curl --silent https://raw.githubusercontent.com/bp0lr/dmut-resolvers/main/resolvers.txt | egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
-        rm ../freshresolvers.txt
-        dnsvalidator -tL dailydns.txt -threads 5 -o ../freshresolvers.txt
+          git clone https://github.com/vortexau/dnsvalidator
+          cd dnsvalidator
+          pip3 install wheel
+          pip3 install setuptools
+          sudo python3 setup.py install
+          curl --silent https://raw.githubusercontent.com/BBerastegui/fresh-dns-servers/master/resolvers.txt | egrep -v '^1[.]0[.]|^1[.]1' > dailydns.txt
+          curl --silent https://raw.githubusercontent.com/janmasarik/resolvers/master/resolvers.txt | egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
+          curl --silent https://public-dns.info/nameservers.txt |egrep -v '^1[.]0[.]|^1[.]1'| egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
+          curl --silent https://raw.githubusercontent.com/bp0lr/dmut-resolvers/main/resolvers.txt | egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
+          rm ../freshresolvers.txt
+          dnsvalidator -tL dailydns.txt -threads 5 -o ../freshresolvers.txt
         shell: bash
 
       - name: Create local changes
