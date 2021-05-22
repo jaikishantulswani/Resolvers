@@ -36,18 +36,18 @@ jobs:
         dnsvalidator -tL dailydns.txt -threads 5 -o ../freshresolvers.txt
         #sed -i '/^$/d' ../resolvers.txt
 
-      - name: Create local changes
-        run: |
-          git add freshresolvers.txt
+    - name: Create local changes
+      run: |
+        git add freshresolvers.txt
 
-      - name: Commit results to Github
-        run: |
-          git config --local user.email "actions@github.com"
-          git config --global user.name "githubactions"
-          git commit -m "PD-Actions report" -a --allow-empty
+    - name: Commit results to Github
+      run: |
+        git config --local user.email "actions@github.com"
+        git config --global user.name "githubactions"
+        git commit -m "PD-Actions report" -a --allow-empty
 
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
