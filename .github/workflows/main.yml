@@ -1,12 +1,12 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Resolvers
+name: Inception
 
 # Controls when the action will run. 
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
-  #schedule:
-  #  - cron: '1 * * * *'
+  schedule:
+    - cron: '* 7 * * *'
   # Remove both comments to run this action on daily basis.
   workflow_dispatch:
  
