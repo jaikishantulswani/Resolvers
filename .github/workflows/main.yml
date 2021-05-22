@@ -54,18 +54,18 @@ jobs:
           curl --silent https://raw.githubusercontent.com/janmasarik/resolvers/master/resolvers.txt | egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
           curl --silent https://public-dns.info/nameservers.txt |egrep -v '^1[.]0[.]|^1[.]1'| egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
           curl --silent https://raw.githubusercontent.com/bp0lr/dmut-resolvers/main/resolvers.txt | egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
-          dnsvalidator -tL dailydns.txt --silent -threads 200 -o output/freshresolvers.txt
+          dnsvalidator -tL dailydns.txt --silent -threads 200 > output/freshresolvers.txt
         shell: bash
 
       - name: Create local changes
         run: |
-                git add output/freshresolvers.txt
+          git add output/freshresolvers.txt
       
       - name: Commit results to Github
         run: |
           git config --local user.email "actions@github.com"
           git config --global user.name "githubactions"
-          git commit -m "PD-Actions report" -a --allow-empty
+          git commit -m "Resolvers" -a --allow-empty
 
       - name: Push changes
         uses: ad-m/github-push-action@master
