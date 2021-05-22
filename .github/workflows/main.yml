@@ -11,6 +11,16 @@ jobs:
     - uses: actions/checkout@master
       with:
         token: ${{ secrets.GITHUB_PERSONAL_TOKEN }}
+
+
+      # Runs a single command using the runners shell
+    - name: Setting up Go Tools
+      env:
+        GO111MODULE: on
+      run: |
+        go get -v github.com/tomnomnom/anew
+      shell: bash
+       
     - name: dnsvalidator
       run: |
         git clone https://github.com/vortexau/dnsvalidator
@@ -18,13 +28,26 @@ jobs:
         pip3 install wheel
         pip3 install setuptools
         sudo python3 setup.py install
-        rm ../resolvers.txt
-        dnsvalidator -tL https://raw.githubusercontent.com/janmasarik/resolvers/master/resolvers.txt -threads 5 -o ../resolvers.txt
-        sed -i '/^$/d' ../resolvers.txt
-    - name: Commit resolvers.txt
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add resolvers.txt
-        git commit -m "Update resolvers" -a
-        git push "https://janmasarik:${{ secrets.GITHUB_PERSONAL_TOKEN }}@github.com/janmasarik/resolvers.git" HEAD:master --follow-tags
+        curl --silent https://raw.githubusercontent.com/BBerastegui/fresh-dns-servers/master/resolvers.txt | egrep -v '^1[.]0[.]|^1[.]1' > dailydns.txt
+        curl --silent https://raw.githubusercontent.com/janmasarik/resolvers/master/resolvers.txt | egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
+        curl --silent https://public-dns.info/nameservers.txt |egrep -v '^1[.]0[.]|^1[.]1'| egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
+        curl --silent https://raw.githubusercontent.com/bp0lr/dmut-resolvers/main/resolvers.txt | egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
+        rm ../freshresolvers.txt
+        dnsvalidator -tL dailydns.txt -threads 5 -o ../freshresolvers.txt
+        #sed -i '/^$/d' ../resolvers.txt
+
+      - name: Create local changes
+        run: |
+          git add freshresolvers.txt
+
+      - name: Commit results to Github
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --global user.name "githubactions"
+          git commit -m "PD-Actions report" -a --allow-empty
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
