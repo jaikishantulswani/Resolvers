@@ -54,7 +54,8 @@ jobs:
           curl --silent https://raw.githubusercontent.com/janmasarik/resolvers/master/resolvers.txt | egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
           curl --silent https://public-dns.info/nameservers.txt |egrep -v '^1[.]0[.]|^1[.]1'| egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
           curl --silent https://raw.githubusercontent.com/bp0lr/dmut-resolvers/main/resolvers.txt | egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
-          dnsvalidator -tL dailydns.txt --silent -threads 10 > output/freshresolvers.txt
+          curl --silent https://raw.githubusercontent.com/Phasip/resolvers/master/resolvers.txt | egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
+          dnsvalidator -tL dailydns.txt --silent -timeout 100 -threads 10 > output/freshresolvers.txt
         shell: bash
 
       - name: Create local changes
