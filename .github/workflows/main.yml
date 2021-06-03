@@ -6,7 +6,7 @@ name: Resolvers
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   schedule:
-    - cron: "05 02 * * *"
+    - cron: "0 8,07 * * *"
   # Remove both comments to run this action on daily basis.
   #workflow_dispatch:
  
