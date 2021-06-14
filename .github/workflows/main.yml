@@ -56,6 +56,7 @@ jobs:
           curl --silent https://raw.githubusercontent.com/bp0lr/dmut-resolvers/main/resolvers.txt | egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
           curl --silent https://raw.githubusercontent.com/Phasip/resolvers/master/resolvers.txt | egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
           curl --silent https://raw.githubusercontent.com/proabiral/Fresh-Resolvers/master/resolvers.txt | egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
+          curl --silent https://raw.githubusercontent.com/indianajson/trusty-resolvers/master/top-resolvers | egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
           dnsvalidator -tL dailydns.txt --silent -timeout 100 -threads 20 > output/freshresolvers.txt
         shell: bash
 
