@@ -44,10 +44,10 @@ jobs:
 
       - name: Setting up and Running DnsValidator
         run: |
-          git clone https://github.com/vortexau/dnsvalidator
+          git clone https://github.com/proabiral/dnsvalidator
           cd dnsvalidator
-          pip3 install wheel
-          pip3 install setuptools
+          sudo pip3 install wheel
+          sudo pip3 install setuptools
           sudo python3 setup.py install
           cd ..
           curl --silent https://raw.githubusercontent.com/BBerastegui/fresh-dns-servers/master/resolvers.txt | egrep -v '^1[.]0[.]|^1[.]1' > dailydns.txt
