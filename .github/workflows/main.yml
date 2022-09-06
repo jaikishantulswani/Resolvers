@@ -6,9 +6,9 @@ name: Resolvers
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   #schedule:
-  #  - cron: "0 5 * * *"
+  #  - cron: '0 5 * * *'
   # Remove both comments to run this action on daily basis.
-  #workflow_dispatch:
+  workflow_dispatch:
  
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
