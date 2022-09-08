@@ -49,8 +49,8 @@ jobs:
           cd ..
           curl --silent https://raw.githubusercontent.com/BBerastegui/fresh-dns-servers/master/resolvers.txt | egrep '^1[.]0[.]|^1[.]1' > dailydns.txt
           curl --silent https://raw.githubusercontent.com/janmasarik/resolvers/master/resolvers.txt |egrep '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
-          #curl --silent https://public-dns.info/nameservers.txt |egrep '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
-          #curl --silent https://raw.githubusercontent.com/bp0lr/dmut-resolvers/main/resolvers.txt | egrep '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
+          curl --silent https://public-dns.info/nameservers-all.txt |egrep '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
+          curl --silent https://raw.githubusercontent.com/blechschmidt/massdns/master/lists/resolvers.txt | egrep '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
           curl --silent https://raw.githubusercontent.com/Phasip/resolvers/master/resolvers.txt | egrep '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
           curl --silent https://raw.githubusercontent.com/proabiral/Fresh-Resolvers/master/resolvers.txt | egrep '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
           curl --silent https://raw.githubusercontent.com/trickest/resolvers/main/resolvers.txt | egrep '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
