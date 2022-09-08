@@ -46,21 +46,24 @@ jobs:
           pip3 install wheel
           pip3 install setuptools
           sudo python3 setup.py install
-          rm ../output/freshresolvers.txt
+          cd ..
+          rm output/freshresolvers.txt
+          ls output/
           curl --silent https://raw.githubusercontent.com/BBerastegui/fresh-dns-servers/master/resolvers.txt | egrep '^1[.]0[.]|^1[.]1' > dailydns.txt
           curl --silent https://raw.githubusercontent.com/janmasarik/resolvers/master/resolvers.txt |egrep '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
           curl --silent https://raw.githubusercontent.com/blechschmidt/massdns/master/lists/resolvers.txt | egrep '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
           curl --silent https://raw.githubusercontent.com/Phasip/resolvers/master/resolvers.txt | egrep '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
           curl --silent https://raw.githubusercontent.com/proabiral/Fresh-Resolvers/master/resolvers.txt | egrep '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
           curl --silent https://raw.githubusercontent.com/trickest/resolvers/main/resolvers.txt | egrep '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
+          curl --silent https://raw.githubusercontent.com/BonJarber/fresh-resolvers/main/resolvers.txt | egrep '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
           cat dailydns.txt | grep -E "(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])" > dailydnsx.txt
-          dnsvalidator --silent -tL dailydnsx.txt -threads 50 -timeout 100 -threads 50 -o ../output/freshresolvers.txt
-          curl --silent https://raw.githubusercontent.com/BonJarber/fresh-resolvers/main/resolvers.txt | egrep '^1[.]0[.]|^1[.]1' | anew -q ../output/freshresolvers.txt
+          dnsvalidator --silent -tL dailydnsx.txt -threads 50 -timeout 100 -threads 50 -o output/freshresolvers.txt
+          
         shell: bash
 
       - name: Create local changes
         run: |
-          git add ../output/freshresolvers.txt
+          git add output/freshresolvers.txt
       
       - name: Commit results to Github
         run: |
