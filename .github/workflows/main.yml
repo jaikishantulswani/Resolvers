@@ -39,7 +39,7 @@ jobs:
           path: /home/runner/go
           key: ${{ runner.os }}-go
 
-      - name: Running Nuclei for vulnerability assessment
+      - name: Running DnsValidator
         run: |
           git clone https://github.com/vortexau/dnsvalidator
           cd dnsvalidator
@@ -49,7 +49,7 @@ jobs:
           cd ..
           curl --silent https://raw.githubusercontent.com/BBerastegui/fresh-dns-servers/master/resolvers.txt | egrep '^1[.]0[.]|^1[.]1' > dailydns.txt
           curl --silent https://raw.githubusercontent.com/janmasarik/resolvers/master/resolvers.txt |egrep '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
-          curl --silent https://public-dns.info/nameservers-all.txt |egrep '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
+          #curl --silent https://public-dns.info/nameservers-all.txt |egrep '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
           curl --silent https://raw.githubusercontent.com/blechschmidt/massdns/master/lists/resolvers.txt | egrep '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
           curl --silent https://raw.githubusercontent.com/Phasip/resolvers/master/resolvers.txt | egrep '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
           curl --silent https://raw.githubusercontent.com/proabiral/Fresh-Resolvers/master/resolvers.txt | egrep '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
