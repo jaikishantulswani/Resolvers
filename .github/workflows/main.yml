@@ -37,7 +37,7 @@ jobs:
 
       - name: Running Nuclei for vulnerability assessment
         run: |
-                    git clone https://github.com/proabiral/dnsvalidator
+          git clone https://github.com/proabiral/dnsvalidator
           cd dnsvalidator
           sudo pip3 install wheel
           sudo pip3 install setuptools
