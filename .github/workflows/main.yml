@@ -44,6 +44,11 @@ jobs:
 
       - name: Setting up and Running DnsValidator
         run: |
+          #git clone https://github.com/proabiral/dnsvalidator
+          #cd dnsvalidator
+          #sudo pip3 install wheel
+          #sudo pip3 install setuptools
+          #sudo python3 setup.py install
           curl --silent https://raw.githubusercontent.com/BBerastegui/fresh-dns-servers/master/resolvers.txt | egrep '^1[.]0[.]|^1[.]1' > dailydns.txt
           curl --silent https://raw.githubusercontent.com/blechschmidt/massdns/master/lists/resolvers.txt | egrep '^1[.]0[.]|^1[.]1'| anew -q dailydns.txt
           curl --silent https://raw.githubusercontent.com/janmasarik/resolvers/master/resolvers.txt |egrep '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
