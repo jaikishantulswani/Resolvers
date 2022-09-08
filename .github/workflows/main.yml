@@ -44,7 +44,8 @@ jobs:
           git clone https://github.com/frost19k/DNSValidator.git
           cd DNSValidator/
           pip3 install .
-          cd ..        
+          cd ..
+          dnsvalidator -h
           curl --silent https://raw.githubusercontent.com/BBerastegui/fresh-dns-servers/master/resolvers.txt | egrep '^1[.]0[.]|^1[.]1' > dailydns.txt
           curl --silent https://raw.githubusercontent.com/blechschmidt/massdns/master/lists/resolvers.txt | egrep '^1[.]0[.]|^1[.]1'| anew -q dailydns.txt
           curl --silent https://raw.githubusercontent.com/janmasarik/resolvers/master/resolvers.txt |egrep '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
