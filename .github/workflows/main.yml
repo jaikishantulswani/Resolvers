@@ -37,13 +37,10 @@ jobs:
 
       - name: Running Nuclei for vulnerability assessment
         run: |
-          git clone https://github.com/proabiral/dnsvalidator
-          cd dnsvalidator
-          sudo pip3 install -r requirements.txt
-          sudo pip3 install wheel
-          sudo pip3 install setuptools
-          sudo python3 setup.py install
-          cd ..
+          git clone https://github.com/frost19k/DNSValidator.git
+          cd DNSValidator/
+          pip3 install .
+          cd ..        
           curl --silent https://raw.githubusercontent.com/BBerastegui/fresh-dns-servers/master/resolvers.txt | egrep '^1[.]0[.]|^1[.]1' > dailydns.txt
           curl --silent https://raw.githubusercontent.com/blechschmidt/massdns/master/lists/resolvers.txt | egrep '^1[.]0[.]|^1[.]1'| anew -q dailydns.txt
           curl --silent https://raw.githubusercontent.com/janmasarik/resolvers/master/resolvers.txt |egrep '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
