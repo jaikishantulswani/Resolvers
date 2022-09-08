@@ -58,7 +58,8 @@ jobs:
           curl --silent https://raw.githubusercontent.com/proabiral/Fresh-Resolvers/master/resolvers.txt | egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
           curl --silent https://raw.githubusercontent.com/indianajson/trusty-resolvers/master/top-resolvers | egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
           curl --silent https://raw.githubusercontent.com/trickest/resolvers/main/resolvers.txt | egrep -v '^1[.]0[.]|^1[.]1' | anew -q dailydns.txt
-          dnsvalidator -tL dailydns.txt --silent -timeout 100 -threads 50 > ../output/freshresolvers.txt
+          cat dailydns.txt | grep -E "(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])" > dailydnsx.txt
+          dnsvalidator -tL dailydnsx.txt --silent -timeout 100 -threads 50 > ../output/freshresolvers.txt
           curl --silent https://raw.githubusercontent.com/BonJarber/fresh-resolvers/main/resolvers.txt |egrep -v '^1[.]0[.]|^1[.]1' | anew -q ../output/freshresolvers.txt
         shell: bash
 
